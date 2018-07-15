@@ -8,6 +8,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.neo4j.repository.config.EnableNeo4jRepositories;
 
+import java.util.concurrent.Executor;
+
 @SpringBootApplication
 @EnableNeo4jRepositories
 @EnableJpaRepositories
