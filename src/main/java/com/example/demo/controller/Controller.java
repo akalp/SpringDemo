@@ -74,7 +74,33 @@ public class Controller {
 
     @RequestMapping(value = "/wordnets", method = RequestMethod.GET)
     public Collection<Wordnet> findWordnetsByName(@RequestParam("name") String name){
-        return wordnetRepository.findByName(name);
+        Collection<Wordnet> wordnets = wordnetRepository.findByName(name);
+        for(Wordnet wordnet: wordnets){
+            if(wordnet.getSynsetID() != null){
+                wordnet.setDefinition(definitionRepository.findDefinitionBySynsetID(wordnet.getSynsetID()).getEng());
+            }
+            if(wordnet.getSynsets() != null){
+                for(SynsetRel synsetRel: wordnet.getSynsets()){
+                    synsetRel.getE().setDefinition(definitionRepository.findDefinitionBySynsetID(synsetRel.getE().getSynsetID()).getEng());
+                }
+            }
+            if(wordnet.getHyponyms() != null){
+                for(HyponymRel hyponymRel:wordnet.getHyponyms()){
+                    hyponymRel.getE().setDefinition(definitionRepository.findDefinitionBySynsetID(hyponymRel.getE().getSynsetID()).getEng());
+                }
+            }
+            if(wordnet.getHypernyms() != null){
+                for(HypernymRel hypernymRel:wordnet.getHypernyms()){
+                    hypernymRel.getE().setDefinition(definitionRepository.findDefinitionBySynsetID(hypernymRel.getE().getSynsetID()).getEng());
+                }
+            }
+            if(wordnet.getAntonyms() != null){
+                for(AntonymRel antonymRel:wordnet.getAntonyms()){
+                    antonymRel.getE().setDefinition(definitionRepository.findDefinitionBySynsetID(antonymRel.getE().getSynsetID()).getEng());
+                }
+            }
+        }
+        return wordnets;
     }
 
 

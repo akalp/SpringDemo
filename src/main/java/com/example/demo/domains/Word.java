@@ -8,7 +8,7 @@ import java.util.Collection;
 @NodeEntity
 public class Word extends Wordnet{
 
-    @Relationship(type = "Synset", direction = Relationship.OUTGOING) private Collection<Wordnet> synsets;
+    @Relationship(type = "Synset", direction = Relationship.OUTGOING) private Collection<SynsetRel> synsets;
 
     public Word(){
         super();
@@ -18,7 +18,7 @@ public class Word extends Wordnet{
         super(name, lang);
     }
 
-    public Collection<Wordnet> getSynsets() {
+    public Collection<SynsetRel> getSynsets() {
         return synsets;
     }
 }
