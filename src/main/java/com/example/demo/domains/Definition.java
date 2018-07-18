@@ -24,6 +24,10 @@ public class Definition implements Serializable {
         this.eng = eng;
     }
 
+    public String getSynsetID() {
+        return synsetID;
+    }
+
     public String getEng() {
         return eng;
     }

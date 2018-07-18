@@ -1,0 +1,95 @@
+marker#Hypernym {
+    fill: blue;
+}
+
+marker#Hyponym {
+    fill: green;
+}
+
+marker#Antonym {
+    fill: red;
+}
+
+marker#Meronym {
+    fill: blueviolet;
+}
+
+marker#Holonym {
+    fill: navy;
+}
+
+marker#Synset {
+    fill: grey;
+}
+
+path.link.Hypernym {
+    stroke: blue;
+}
+
+path.link.Hyponym {
+    stroke: green;
+}
+
+path.link.Antonym {
+    stroke: red;
+}
+
+path.link.Meronym {
+    stroke: blueviolet;
+}
+
+path.link.Holonym {
+    stroke: navy;
+}
+
+path.link.Synset {
+    stroke: grey;
+}
+
+path.link {
+    fill: none;
+}
+
+g.node circle:hover {
+    fill: lime;
+}
+
+g.node .word-name {
+    pointer-events: none;
+    font: 10px sans-serif;
+}
+
+g.node .Word {
+    fill: darkgrey;
+}
+
+g.node .Noun {
+    fill: greenyellow;
+}
+
+g.node .Verb {
+    fill: aqua;
+}
+
+g.node .Adverb {
+    fill: darkred;
+}
+
+g.node .Adjective {
+    fill: darkseagreen;
+}
+
+#graph {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%;
+    vertical-align: top;
+    overflow: hidden;
+}
+.node, .link {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+}

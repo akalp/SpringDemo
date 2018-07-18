@@ -2,32 +2,37 @@ package com.example.demo.domains;
 
 import org.neo4j.ogm.annotation.*;
 
-import java.util.Collection;
+import java.util.List;
 
 @NodeEntity
 public class Wordnet {
     @Id @GeneratedValue private Long id;
 
-    private String name, lang;
+    private String name, lang, type;
 
     @Property(name = "id") private String synsetID;
 
     private String definition;
 
-    @Relationship(type = "Hypernym") private Collection<HypernymRel> hypernyms;
+    @Relationship(type = "Hypernym", direction = Relationship.OUTGOING) private List<HypernymRel> hypernyms;
 
-    @Relationship(type = "Hyponym") private Collection<HyponymRel> hyponyms;
+    @Relationship(type = "Hyponym", direction = Relationship.OUTGOING) private List<HyponymRel> hyponyms;
 
-    @Relationship(type = "Antonym") private Collection<AntonymRel> antonyms;
+    @Relationship(type = "Antonym", direction = Relationship.OUTGOING) private List<AntonymRel> antonyms;
 
-    @Relationship(type = "Synset") private Collection<SynsetRel> synsets;
+    @Relationship(type = "Meronym", direction = Relationship.OUTGOING) private List<MeronymRel> meronyms;
+
+    @Relationship(type = "Holonym", direction = Relationship.OUTGOING) private List<HolonymRel> holonyms;
+
+    @Relationship(type = "Synset", direction = Relationship.OUTGOING) private List<SynsetRel> synsets;
 
 
     public Wordnet(){}
 
-    public Wordnet(String name, String lang){
+    public Wordnet(String name, String lang, String type){
         this.name = name;
         this.lang = lang;
+        this.type = type;
     }
 
     public String getName() {
@@ -36,6 +41,10 @@ public class Wordnet {
 
     public String getLang() {
         return lang;
+    }
+
+    public String getType() {
+        return type;
     }
 
     public String getSynsetID() {
@@ -50,19 +59,27 @@ public class Wordnet {
         this.definition = definition;
     }
 
-    public Collection<HypernymRel> getHypernyms() {
+    public List<HypernymRel> getHypernyms() {
         return hypernyms;
     }
 
-    public Collection<HyponymRel> getHyponyms() {
+    public List<HyponymRel> getHyponyms() {
         return hyponyms;
     }
 
-    public Collection<AntonymRel> getAntonyms() {
+    public List<AntonymRel> getAntonyms() {
         return antonyms;
     }
 
-    public Collection<SynsetRel> getSynsets() {
+    public List<SynsetRel> getSynsets() {
         return synsets;
+    }
+
+    public List<MeronymRel> getMeronyms() {
+        return meronyms;
+    }
+
+    public List<HolonymRel> getHolonyms() {
+        return holonyms;
     }
 }
