@@ -55,7 +55,7 @@ g.node circle:hover {
 }
 
 g.node .word-name {
-    pointer-events: none;
+    /*pointer-events: none;*/
     font: 10px sans-serif;
 }
 

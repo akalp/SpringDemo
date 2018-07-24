@@ -1,0 +1,245 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wordnet</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css"
+          integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+
+</head>
+
+<body>
+<br/>
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <input type="text" placeholder="Search for Word" class="form-control" name="search" onfocus="this.value=''">
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-sm-2">
+            <button id="searchButton" class="btn btn-default btn-sm btn-block" onclick="updateData()">Search</button>
+        </div>
+        <div class="col-sm-2">
+            <div id="sourcelang" class="button-group">
+                <button type="button" class="btn btn-default btn-sm dropdown-toggle btn-block" data-toggle="dropdown"><span>Source Language</span> <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    <li><a href="#" class="small" data-value="eng" tabIndex="-1"><input type="checkbox"/>English</a></li>
+                    <li><a href="#" class="small" data-value="tur" tabIndex="-1"><input type="checkbox"/>Turkish</a></li>
+                    <li><a href="#" class="small" data-value="fra" tabIndex="-1"><input type="checkbox"/>French</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div id="targetlang" class="button-group">
+                <button type="button" class="btn btn-default btn-sm dropdown-toggle btn-block" data-toggle="dropdown"><span>Target Language</span> <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    <li><a href="#" class="small" data-value="eng" tabIndex="-1"><input type="checkbox"/>English</a></li>
+                    <li><a href="#" class="small" data-value="tur" tabIndex="-1"><input type="checkbox"/>Turkish</a></li>
+                    <li><a href="#" class="small" data-value="fra" tabIndex="-1"><input type="checkbox"/>French</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="graph">
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"
+        integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em"
+        crossorigin="anonymous"></script>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script type="text/javascript">
+    $(document).keypress(function (e) {
+        var keycode = (e.keyCode ? e.keyCode : e.which);
+        if (keycode === 13) {
+            $("#searchButton").click();
+            // updateData();
+        }
+    });
+
+    var svg = d3.select('#graph').append('svg').attr('pointer-events', 'all').attr("width", 0).attr("height", 0);
+
+    svg.append("svg:defs").selectAll("marker")
+        .data(["Synset", "Hyponym", "Hypernym", "Antonym", "Meronym", "Holonym"])
+        .enter().append("svg:marker")
+        .attr("id", String)
+        .attr("viewBox", "0 -5 10 10")
+        .attr("refX", 5)
+        .attr("markerWidth", 6)
+        .attr("markerHeight", 6)
+        .attr("orient", "auto")
+        .append("svg:path")
+        .attr("d", "M0,-5L10,0L0,5");
+
+    function updateData() {
+        svg.selectAll("g").remove();
+        svg.selectAll("path").remove();
+        var name = $("input[name=search]").val();
+        if (name) {
+            var width = window.innerWidth, height = window.innerHeight;
+
+            var force = d3.forceSimulation()
+                .force("link", d3.forceLink().id(function(d) { return d.index; }).distance(10))
+                // .force("collide",d3.forceCollide( function(d){return d.r + 8 }).iterations(16) )
+                .force("charge", d3.forceManyBody().strength(-300))
+                // .force("center", d3.forceCenter(width / 2, height / 2))
+                .force("y", d3.forceY(height/2-20).strength(0.5))
+                .force("x", d3.forceX(width/2-20).strength(0.5));
+
+            var sorgu = "?name="+encodeURIComponent(name);
+
+            if(sourcelangstr!=null)
+                sorgu += "&slang="+sourcelangstr;
+            if(targetlangstr!=null)
+                sorgu += "&tlang="+targetlangstr;
+
+            d3.json("/wordnet/graph"+sorgu, function (error, graph) {
+                if (error) return;
+
+                svg.attr("width", width)
+                    .attr("height", height)
+                    .attr("preserveAspectRatio", "xMinYMin meet")
+                    .attr("viewBox", "0 0 800 800");
+
+                var link = svg.selectAll(".link")
+                    .data(graph.links).enter()
+                    .append("path")
+                    .attr("class", function (d) {
+                        return "link " + d.type;
+                    })
+                    .attr("marker-mid", function (d) {
+                        return "url(#" + d.type + ")";
+                    });
+
+                var node = svg.selectAll(".node")
+                    .data(graph.nodes).enter()
+                    .append("g")
+                    .attr("class", "node")
+                    .call(d3.drag()
+                        .on("start", dragstarted)
+                        .on("drag", dragged)
+                        .on("end", dragended));
+
+                node.append("circle")
+                    .attr("class", function (d) {
+                        return d.type
+                    })
+                    .attr("r", 5);
+
+                node.append("text")
+                    .attr("class", "word-name")
+                    .attr("dx", 12)
+                    .attr("dy", 2)
+                    .text(function (d) {
+                        return d.word
+                    });
+
+                node
+                    .append("title")
+                    .text(function (d) {
+                        return d.lang+":"+d.word
+                    });
+
+
+                force.nodes(graph.nodes)
+                    .on("tick", ticked);
+                force.force("link").links(graph.links);
+
+
+                function ticked() {
+                    link.attr("d", function (d) {
+                        var dx = d.target.x - d.source.x,
+                            dy = d.target.y - d.source.y,
+                            dr = Math.sqrt(dx * dx + dy * dy);
+
+                        return [
+                            "M", d.source.x, d.source.y,
+                            "A", dr, dr, 0, 0, 1, d.target.x, d.target.y
+                        ].join(" ");
+                    });
+
+                    node.attr("transform", function (d) {
+                        return "translate(" + d.x + "," + d.y + ")";
+                    });
+                }
+
+            });
+
+            function dragstarted(d) {
+                if (!d3.event.active) force.alphaTarget(0.3).restart();
+                d.fx = d.x;
+                d.fy = d.y;
+            }
+
+            function dragged(d) {
+                d.fx = d3.event.x;
+                d.fy = d3.event.y;
+            }
+
+            function dragended(d) {
+                if (!d3.event.active) force.alphaTarget(0);
+                d.fx = null;
+                d.fy = null;
+            }
+        }
+    }
+
+    var sourcelang = [];
+    var sourcelangstr;
+
+    $( '#sourcelang>.dropdown-menu a' ).on( 'click', function( event ) {
+
+        var $target = $( event.currentTarget ),
+            val = $target.attr( 'data-value' ),
+            $inp = $target.find( 'input' ),
+            idx;
+
+        if ( ( idx = sourcelang.indexOf( val ) ) > -1 ) {
+            sourcelang.splice( idx, 1 );
+            setTimeout( function() { $inp.prop( 'checked', false ) }, 0);
+        } else {
+            sourcelang.push( val );
+            setTimeout( function() { $inp.prop( 'checked', true ) }, 0);
+        }
+
+        $( event.target ).blur();
+
+        sourcelangstr = ""+sourcelang;
+        return false;
+    });
+
+    var targetlang = [];
+    var targetlangstr;
+
+    $( '#targetlang>.dropdown-menu a' ).on( 'click', function( event ) {
+
+        var $target = $( event.currentTarget ),
+            val = $target.attr( 'data-value' ),
+            $inp = $target.find( 'input' ),
+            idx;
+
+        if ( ( idx = targetlang.indexOf( val ) ) > -1 ) {
+            targetlang.splice( idx, 1 );
+            setTimeout( function() { $inp.prop( 'checked', false ) }, 0);
+        } else {
+            targetlang.push( val );
+            setTimeout( function() { $inp.prop( 'checked', true ) }, 0);
+        }
+
+        $( event.target ).blur();
+
+        targetlangstr = ""+targetlang;
+        return false;
+    });
+</script>
+</body>
+</html>

@@ -3,10 +3,13 @@ package com.example.demo.controller;
 import com.example.demo.domains.*;
 import com.example.demo.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
+//@Scope("prototype")
 @RestController
 @RequestMapping(value = "/")
 public class Controller {
@@ -132,6 +135,11 @@ public class Controller {
     
     private Object[] getNodeObjects(Wordnet node){
         return new Object[]{node.getName(), node.getLang(), node.getType(), node.getSynsetID(), node.getDefinition()};
+    }
+
+    @RequestMapping("/languages")
+    public List<String> getLanguages(){
+        return wordnetRepository.getLanguages();
     }
 
 
