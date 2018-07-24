@@ -1,0 +1,90 @@
+path.link {
+    fill: none;
+}
+
+path.link.Hypernym {
+    stroke: blue;
+}
+
+path.link.Hyponym {
+    stroke: green;
+}
+
+path.link.Antonym {
+    stroke: red;
+}
+
+path.link.Meronym {
+    stroke: blueviolet;
+}
+
+path.link.Holonym {
+    stroke: navy;
+}
+
+path.link.Synset {
+    stroke: grey;
+}
+
+g.node .Word {
+    fill: darkgrey;
+}
+
+#Noun-definitions, g.node .Noun {
+    background-color: greenyellow;
+    fill: greenyellow;
+}
+
+#Verb-definitions, g.node .Verb {
+    background-color: aqua;
+    fill: aqua;
+
+  }
+#Adverb-definitions, g.node .Adverb {
+    background-color: #b42e2e;
+    fill: #b42e2e;
+}
+
+#Adjective-definitions, g.node .Adjective {
+    background-color: darkseagreen;
+    fill: darkseagreen;
+}
+
+g.node.hovered > circle{
+  fill:orange;
+}
+
+.hovered {
+  fill: orange;
+  background-color: orange;
+}
+
+.select2-search__field {
+  padding: .375rem .75rem;
+  width: 100% !important;
+}
+
+.buttons {
+  margin: .5rem .25rem;
+  width: 45%;
+  font-size: .75rem;
+  border-radius: 0;
+}
+
+.search {
+  margin: .75rem 0;
+  padding: 1rem 1rem;
+}
+
+#alt-row {
+  visibility: hidden;
+}
+
+.word-name {
+    font: 10px sans-serif;
+}
+
+
+#searched-word {
+    padding: .25rem 0;
+}
