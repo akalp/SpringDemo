@@ -1,0 +1,1802 @@
+[
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "eng",
+      {
+        "low": 346789,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "fra",
+      {
+        "low": 163094,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "deu",
+      {
+        "low": 158140,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "rus",
+      {
+        "low": 127261,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "spa",
+      {
+        "low": 112654,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "fin",
+      {
+        "low": 97545,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "ita",
+      {
+        "low": 92685,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "swe",
+      {
+        "low": 80161,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "nld",
+      {
+        "low": 71238,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "pol",
+      {
+        "low": 71081,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "kur",
+      {
+        "low": 68685,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "por",
+      {
+        "low": 65263,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "tur",
+      {
+        "low": 62757,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "cmn",
+      {
+        "low": 59465,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "jpn",
+      {
+        "low": 53857,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "ces",
+      {
+        "low": 50506,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "ell",
+      {
+        "low": 47566,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "cat",
+      {
+        "low": 46191,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "ukr",
+      {
+        "low": 44654,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "hun",
+      {
+        "low": 43466,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "epo",
+      {
+        "low": 41106,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "lit",
+      {
+        "low": 36804,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "ron",
+      {
+        "low": 35856,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "ara",
+      {
+        "low": 35642,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "lat",
+      {
+        "low": 33110,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "dan",
+      {
+        "low": 32720,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "oci",
+      {
+        "low": 32521,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "nor",
+      {
+        "low": 31937,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "fas",
+      {
+        "low": 31912,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "ido",
+      {
+        "low": 31845,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "bul",
+      {
+        "low": 31157,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "hbs",
+      {
+        "low": 31115,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "heb",
+      {
+        "low": 28028,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "isl",
+      {
+        "low": 27739,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "kor",
+      {
+        "low": 26498,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "slk",
+      {
+        "low": 23842,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "glg",
+      {
+        "low": 23209,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "zho",
+      {
+        "low": 21392,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "est",
+      {
+        "low": 21191,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "srp",
+      {
+        "low": 20038,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "eus",
+      {
+        "low": 18200,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "mkd",
+      {
+        "low": 18141,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "ind",
+      {
+        "low": 17276,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "bel",
+      {
+        "low": 17163,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "gle",
+      {
+        "low": 17050,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "kat",
+      {
+        "low": 16701,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "slv",
+      {
+        "low": 16491,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "vie",
+      {
+        "low": 16419,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "hye",
+      {
+        "low": 16250,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "hrv",
+      {
+        "low": 15694,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "hin",
+      {
+        "low": 12396,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "mri",
+      {
+        "low": 12070,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "msa",
+      {
+        "low": 11911,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "lav",
+      {
+        "low": 11908,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "kaz",
+      {
+        "low": 11844,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "tgl",
+      {
+        "low": 11360,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "aze",
+      {
+        "low": 10988,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "tha",
+      {
+        "low": 10865,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "swa",
+      {
+        "low": 10034,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "nno",
+      {
+        "low": 8701,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "mlg",
+      {
+        "low": 8405,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "cym",
+      {
+        "low": 7647,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "yue-can",
+      {
+        "low": 7309,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "gla",
+      {
+        "low": 7284,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "yid",
+      {
+        "low": 6991,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "sqi",
+      {
+        "low": 6547,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "vol",
+      {
+        "low": 6488,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "tat",
+      {
+        "low": 6387,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "fao",
+      {
+        "low": 6369,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "tgk",
+      {
+        "low": 6028,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "tuk",
+      {
+        "low": 5793,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "tel",
+      {
+        "low": 5676,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "afr",
+      {
+        "low": 5656,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "uzb",
+      {
+        "low": 5536,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "khm",
+      {
+        "low": 5395,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "nrm",
+      {
+        "low": 5194,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "kir",
+      {
+        "low": 5170,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "ina",
+      {
+        "low": 4996,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "grc",
+      {
+        "low": 4888,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "lim",
+      {
+        "low": 4630,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "mon",
+      {
+        "low": 4473,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "ast",
+      {
+        "low": 4428,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "urd",
+      {
+        "low": 4294,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "ben",
+      {
+        "low": 4113,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "nav",
+      {
+        "low": 4007,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "bre",
+      {
+        "low": 3968,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "roh",
+      {
+        "low": 3815,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "mlt",
+      {
+        "low": 3810,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "lao",
+      {
+        "low": 3730,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "bak",
+      {
+        "low": 3708,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "oss",
+      {
+        "low": 3687,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "glv",
+      {
+        "low": 3592,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "srd",
+      {
+        "low": 3557,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "ltz",
+      {
+        "low": 3478,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "nan",
+      {
+        "low": 3407,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "mar",
+      {
+        "low": 3338,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "tam",
+      {
+        "low": 3222,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "wln",
+      {
+        "low": 3196,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "mya",
+      {
+        "low": 3194,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  },
+  {
+    "keys": [
+      "a.lang",
+      "o"
+    ],
+    "length": 2,
+    "_fields": [
+      "fur",
+      {
+        "low": 2968,
+        "high": 0
+      }
+    ],
+    "_fieldLookup": {
+      "a.lang": 0,
+      "o": 1
+    }
+  }
+]

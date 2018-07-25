@@ -10,16 +10,23 @@ var link, node;
 // the data - an object with nodes and links
 var graph;
 
-$("#filter").hide();
+var slang = "eng", tlang=new Set(["eng"]);
+var languages;
+d3.json("/languages").then(function (_langs){
+    languages=_langs.langs;
+    test();
+});
+
+// $("#filter").hide();
 
 d3.select("#search").on("click", function () {
-    $("#filter").show();
+    // $("#filter").show();
 
     var word = d3.select("#search-box").property("value").toLowerCase();
     d3.select("#searched-word").text(word);
 
     // load the data
-    d3.json("/wordnet/graph?name="+word).then(function (_graph) {
+    d3.json("/wordnet/graph?name="+word+"&slang="+slang+"&tlang="+Array.from(tlang).join(",")).then(function (_graph) {
         if (!_graph) return;
         graph = _graph;
         initializeDisplay();
@@ -48,7 +55,7 @@ d3.select("#search").on("click", function () {
         },
         charge: {
             enabled: true,
-            strength: -50,
+            strength: -250,
             distanceMin: 1,
             distanceMax: 1000
         },
@@ -70,7 +77,7 @@ d3.select("#search").on("click", function () {
         },
         link: {
             enabled: true,
-            distance: 40,
+            distance: 80,
             iterations: 1
         }
     };
@@ -136,6 +143,8 @@ d3.select("#search").on("click", function () {
             wordtypes.forEach(function (d) {
                 definitions.select('#' + d + 's').selectAll("div").remove()
             });
+            d3.select("#source-languages").selectAll("option").remove()
+            d3.select("#target-languages").selectAll("option").remove()
         }
 
         // set the data and properties of link lines
@@ -227,23 +236,6 @@ d3.select("#search").on("click", function () {
         updateForces();
     });
 
-    //lanugages
-    var languages = new Set();
-
-    function initializeLanguages() {
-        graph.nodes.forEach(function (d) {
-            languages.add(d.lang);
-        }); //TO DO add langs to search
-        initializeLanguageFilters();
-    }
-
-    function initializeLanguageFilters() {
-        languages.forEach(function (lang) {
-            $("#source-languages").append("<option>" + lang + "</option>");
-            $("#target-languages").append("<option>" + lang + "</option>");
-        })
-    }
-
     //definitions
     function initializeDefinitions() {
         graph.nodes.forEach(function (d) {
@@ -262,57 +254,11 @@ d3.select("#search").on("click", function () {
         })
     }
 
-    //select2
-    function initializeSelect2() {
-        $('#source-languages').select2({
-            placeholder: 'Source Languages',
-            theme: 'bootstrap4'
-        });
-
-        $('#target-languages').select2({
-            placeholder: 'Target Languages',
-            theme: 'bootstrap4'
-        });
-
-        $('#relationships').select2({
-            placeholder: 'Relationships',
-            theme: 'bootstrap4'
-        });
-
-        $('select').on('change', function (evt) {
-            var uldiv = $(this).siblings('span.select2').find('ul')
-            var count = $(this).find('option:selected').length;
-            if (count > 2)
-                uldiv.html("<li style=\"margin-top: .25rem;\">" + count + " languages selected</li>")
-        });
-
-        $('select').on('select2:open', function (d) {
-            if($(".select2-dropdown").find("button").length === 0)
-                $(".select2-dropdown").prepend("<div><button id=\"" + d.target.id + "-all\" class=\"btn btn-primary buttons\">Select All</button><button id=\"" + d.target.id +
-                "-off\" class=\"btn btn-primary buttons\">Unselect All</button></div>");
-
-            $("#" + d.target.id + "-all").on("click", function () {
-                $('#' + d.target.id + ' > option').prop("selected", true);
-                $("#" + d.target.id).trigger("change");
-            });
-
-            $("#" + d.target.id + "-off").on("click", function () {
-                $("#" + d.target.id).val(null).trigger("change");
-            });
-        })
-        ;
-        $('select').on('select2:closing', function () {
-            $(".select2-dropdown").find("div").remove();
-        });
-
-    }
 
     function start() {
         d3.select("#alt-row").style("visibility", "visible");
-
+        test();
         initializeDefinitions();
-        initializeLanguages();
-        initializeSelect2();
 
         //Hover Coloring
         $(".node, .card-body").hover(
@@ -339,3 +285,73 @@ d3.select("#search").on("click", function () {
         });
     }
 });
+
+d3.select("#filter-submit").on("click", function(){$("#search").click()});
+
+test();
+function test(){
+    initializeLanguages();
+    initializeSelect2();
+function initializeLanguages() {
+    languages.forEach(function (lang) {
+        var str = (tlang.has(lang))? "<option selected>":"<option>";
+        var str2 = (slang === lang)? "<option selected>":"<option>";
+        $("#source-languages").append(str2 + lang + "</option>");
+        $("#target-languages").append(str + lang + "</option>");
+    })
+}
+function initializeSelect2() {
+    $('#source-languages').select2({
+        placeholder: 'Source Languages',
+        theme: 'bootstrap4'
+    });
+
+    $('#target-languages').select2({
+        placeholder: 'Target Languages',
+        theme: 'bootstrap4'
+    });
+
+    $('#relationships').select2({
+        placeholder: 'Relationships',
+        theme: 'bootstrap4'
+    });
+
+    $('select').on('change', function (d) {
+        // var uldiv = $(this).siblings('span.select2').find('ul');
+        // var count = $(this).find('option:selected').length;
+        // if (count > 2)
+        //     uldiv.html("<li style=\"margin-top: .25rem;\">" + count + " languages selected</li>");
+
+
+        if (d.target.id === "source-languages") slang = $("#" + d.target.id).select2("data")[0].id;
+        else if (d.target.id === "target-languages") {
+            var temp = [];
+            $("#" + d.target.id).select2("data").forEach(function (l) {
+                if (temp.indexOf(l.id) === -1)
+                    temp.push(l.id);
+            });
+            if(temp.length === 0) tlang=new Set(["eng"]);
+            else tlang = new Set(temp);
+        }
+    });
+
+    $('select').on('select2:open', function (d) {
+        if ($(".select2-dropdown").find("button").length === 0 && d.target.id !== "source-languages")
+            $(".select2-dropdown").prepend("<div><button id=\"" + d.target.id + "-all\" class=\"btn btn-primary buttons\">Select All</button><button id=\"" + d.target.id +
+                "-off\" class=\"btn btn-primary buttons\">Unselect All</button></div>");
+
+        $("#" + d.target.id + "-all").on("click", function () {
+            $('#' + d.target.id + ' > option').prop("selected", true);
+            $("#" + d.target.id).trigger("change");
+        });
+
+        $("#" + d.target.id + "-off").on("click", function () {
+            $("#" + d.target.id).val(null).trigger("change");
+        });
+    })
+    ;
+    $('select').on('select2:closing', function () {
+        $(".select2-dropdown").find("div").remove();
+    });
+}
+}
