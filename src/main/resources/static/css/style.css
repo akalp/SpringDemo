@@ -2,27 +2,27 @@ path.link {
     fill: none;
 }
 
-path.link.Hypernym {
+.Hypernym {
     stroke: blue;
 }
 
-path.link.Hyponym {
+.Hyponym {
     stroke: green;
 }
 
-path.link.Antonym {
+.Antonym {
     stroke: red;
 }
 
-path.link.Meronym {
+.Meronym {
     stroke: blueviolet;
 }
 
-path.link.Holonym {
+.Holonym {
     stroke: navy;
 }
 
-path.link.Synset {
+.Synset {
     stroke: grey;
 }
 
@@ -50,11 +50,11 @@ g.node .Word {
     fill: darkseagreen;
 }
 
-g.node.hovered > circle{
-  fill:orange;
+g.node {
+    cursor : pointer;
 }
 
-.hovered {
+.hovered, g.node.hovered>circle {
   fill: orange;
   background-color: orange;
 }

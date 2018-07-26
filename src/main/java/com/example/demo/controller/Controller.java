@@ -25,15 +25,11 @@ public class Controller {
     }
 
     @RequestMapping(value = "/wordnet/graph", method = RequestMethod.GET)
-    public Map<String, Object> graph(@RequestParam("name") String name, @RequestParam(value = "slang", required = false) String slang, @RequestParam(value = "tlang", required = false) String tlang) {
-        if(slang != null && tlang != null)
-            return toD3(wordnetRepository.graphOfWordWithSourceAndTargetLang(name, slang, tlang.split(",")));
-        if(slang != null)
-            return toD3(wordnetRepository.graphOfWordWithSourceLang(name, slang));
-        if(tlang != null)
-            return toD3(wordnetRepository.graphOfWordWithTargetLang(name, tlang.split(",")));
-
-        return toD3(wordnetRepository.graphOfWord(name));
+    public Map<String, Object> graph(@RequestParam("name") String name,
+                                     @RequestParam(value = "slang") String slang,
+                                     @RequestParam(value = "tlang") String tlang,
+                                     @RequestParam(value= "rels", required = false) String rels) {
+        return toD3(wordnetRepository.graphOfWordWithSourceAndTargetLang(name, slang, tlang.split(","), rels.split(",")));
     }
 
     private Map<String, Object> toD3(Collection<Wordnet> wordnets) {
@@ -137,10 +133,11 @@ public class Controller {
         return new Object[]{node.getName(), node.getLang(), node.getType(), node.getSynsetID(), node.getDefinition()};
     }
 
-    @RequestMapping(value = "/languages", method = RequestMethod.GET)
+    @RequestMapping(value = "/filters", method = RequestMethod.GET)
     public Map<String,List<String>> getLanguages(){
         Map<String, List<String>> result = new HashMap<>();
         result.put("langs", Arrays.asList("eng", "fra", "deu", "rus", "spa", "fin", "ita", "swe", "nld", "pol", "kur", "por", "tur", "cmn", "jpn", "ces", "ell", "cat", "ukr", "hun", "epo", "lit", "ron", "ara", "lat", "dan", "oci", "nor", "fas", "ido", "bul", "hbs", "heb", "isl", "kor", "slk", "glg", "zho", "est", "srp", "eus", "mkd", "ind", "bel", "gle", "kat", "slv", "vie", "hye", "hrv", "hin", "mri", "msa", "lav", "kaz", "tgl", "aze", "tha", "swa", "nno", "mlg", "cym", "yue-can", "gla", "yid", "sqi", "vol", "tat", "fao", "tgk", "tuk", "tel", "afr", "uzb", "khm", "nrm", "kir", "ina", "grc", "lim", "mon", "ast", "urd", "ben", "nav", "bre", "roh", "mlt", "lao", "bak", "oss", "glv", "srd", "ltz", "nan", "mar", "tam", "wln", "mya", "fur"));
+        result.put("rels", Arrays.asList("Synset","Hypernym","Hyponym","Antonym","Meronym","Holonym"));
         return result;
     }
 }

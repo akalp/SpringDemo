@@ -1,5 +1,12 @@
+var graphQuery = $("#graph");
+
 //d3js
-var svg = d3.select("#graph > svg").attr("pointer-events", "all").attr("preserveAspectRatio", "xMinYMin meet");
+var svg = d3.select("#graph > svg")
+    .attr("pointer-events", "all")
+    .attr("preserveAspectRatio", "xMinYMin meet")
+    .attr("width", graphQuery.width())
+    .attr("height", graphQuery.height());
+
 var definitions = d3.select("#definitions");
 
 var width = svg.node().getBoundingClientRect().width;
@@ -10,23 +17,13 @@ var link, node;
 // the data - an object with nodes and links
 var graph;
 
-var slang = "eng", tlang=new Set(["eng"]);
-var languages;
-d3.json("/languages").then(function (_langs){
-    languages=_langs.langs;
-    test();
-});
 
-// $("#filter").hide();
-
-d3.select("#search").on("click", function () {
-    // $("#filter").show();
-
+function search() {
     var word = d3.select("#search-box").property("value").toLowerCase();
     d3.select("#searched-word").text(word);
 
     // load the data
-    d3.json("/wordnet/graph?name="+word+"&slang="+slang+"&tlang="+Array.from(tlang).join(",")).then(function (_graph) {
+    d3.json("/wordnet/graph?name=" + word + "&slang=" + slang + "&tlang=" + Array.from(tlang).join(",") + "&rels=" + Array.from(srels).join(",")).then(function (_graph) {
         if (!_graph) return;
         graph = _graph;
         initializeDisplay();
@@ -36,11 +33,10 @@ d3.select("#search").on("click", function () {
     //////////// FORCE SIMULATION ////////////
 
     // force simulator
-    var simulation;
+    var simulation = d3.forceSimulation();
 
     // set up the simulation and event to update locations after each tick
     function initializeSimulation() {
-        simulation = d3.forceSimulation();
         simulation.nodes(graph.nodes);
         start();
         initializeForces();
@@ -133,18 +129,16 @@ d3.select("#search").on("click", function () {
 
     // generate the svg objects and force simulation
     function initializeDisplay() {
-        var wordtypes=["Noun","Verb","Adjective","Adverb"];
-        if(link) { //for clear old data
+        var wordtypes = ["Noun", "Verb", "Adjective", "Adverb"];
+        if (link) { //for clear old data
             d3.select(".nodes").remove();
             d3.select(".links").remove();
             d3.select("#definitions").selectAll(".card").each(function () {
-               $(this).show();
+                $(this).show();
             });
             wordtypes.forEach(function (d) {
                 definitions.select('#' + d + 's').selectAll("div").remove()
             });
-            d3.select("#source-languages").selectAll("option").remove()
-            d3.select("#target-languages").selectAll("option").remove()
         }
 
         // set the data and properties of link lines
@@ -163,6 +157,8 @@ d3.select("#search").on("click", function () {
             .selectAll(".node")
             .data(graph.nodes).enter()
             .append("g")
+            .attr("height", "20px")
+            .attr("width", "20px")
             .attr("class", "node")
             .attr("w_id", function (d) {
                 if (d.synsetID) return d.synsetID
@@ -231,6 +227,9 @@ d3.select("#search").on("click", function () {
 
     // update size-related forces
     d3.select(window).on("resize", function () {
+        svg
+            .attr("width", graphQuery.width())
+            .attr("height", graphQuery.height());
         width = svg.node().getBoundingClientRect().width;
         height = svg.node().getBoundingClientRect().height;
         updateForces();
@@ -245,7 +244,7 @@ d3.select("#search").on("click", function () {
                 .attr("w_id", function () {
                     if (d.synsetID) return d.synsetID
                 })
-                .html("<b>" + d.word + ":</b>" + d.definition);
+                .html("<b>" + d.word + ":&#9;</b>" + d.definition);
         });
 
         d3.select("#definitions").selectAll(".card").each(function () {
@@ -257,7 +256,7 @@ d3.select("#search").on("click", function () {
 
     function start() {
         d3.select("#alt-row").style("visibility", "visible");
-        test();
+        initializeSelect2();
         initializeDefinitions();
 
         //Hover Coloring
@@ -272,86 +271,150 @@ d3.select("#search").on("click", function () {
 
         //Tooltip over svg elements
         $(".node").each(function () {
+            var lang = ($(this).attr("lang") === "eng") ? "Language Code: 🇺🇸 " : "Language Code: ";
             $(this).tooltip({
                 //Can write any html code to title property
-                title: "<br>Language Code: " + $(this).attr("lang") + "</br>Word: " + $(this).text() + "</br>Type:" + $(this).find("circle").attr("class") + "</p>",
+                title: "<p>" + lang + $(this).attr("lang") + "</br>Word: " + $(this).text() + "</br>Type:" + $(this).find("circle").attr("class") + "</p>",
                 container: 'body',
                 placement: 'auto',
                 html: true
             });
         });
+
+        $(".link").each(function () {
+            var type = $(this).attr('class').split(/\s+/)[1];
+            $(this).tooltip({
+                //Can write any html code to title property
+                title: "<p>" + type + "</p>",
+                container: 'body',
+                placement: 'auto',
+                html: true
+            });
+        });
+
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()
         });
+
+        $(".node").click(function () {
+            $('.tooltip').remove();
+            d3.select("#search-box").property("value", $(this).text());
+            sourceLangQuery.val($(this).attr("lang"));
+            $("#search").click();
+        });
     }
+}
+
+d3.select("#filter-submit").on("click", function () {
+    search();
 });
 
-d3.select("#filter-submit").on("click", function(){$("#search").click()});
 
-test();
-function test(){
-    initializeLanguages();
+var sourceLangQuery = $("#source-languages");
+var targetLangQuery = $("#target-languages");
+var relationshipQuery = $("#relationships");
+
+var slang = "eng", tlang = new Set(["eng"]), srels;
+
+var languages;
+var relationships;
+d3.json("/filters").then(function (_filters) {
+    languages = _filters.langs;
+    relationships = _filters.rels;
+    srels = new Set(relationships);
+    initializeFilters();
     initializeSelect2();
-function initializeLanguages() {
+});
+
+function initializeFilters() {
     languages.forEach(function (lang) {
-        var str = (tlang.has(lang))? "<option selected>":"<option>";
-        var str2 = (slang === lang)? "<option selected>":"<option>";
-        $("#source-languages").append(str2 + lang + "</option>");
-        $("#target-languages").append(str + lang + "</option>");
+        var str = (tlang.has(lang)) ? "<option selected value="+lang+">" : "<option value="+lang+">";
+        var str2 = (slang === lang) ? "<option selected value="+lang+">" : "<option value="+lang+">";
+        sourceLangQuery.append(str2 + lang + "</option>");
+        targetLangQuery.append(str + lang + "</option>");
+    });
+    relationships.forEach(function (rel){
+        relationshipQuery.append("<option selected value="+rel +" class="+ rel + ">"+rel+"</option>")
     })
+
 }
+
 function initializeSelect2() {
-    $('#source-languages').select2({
+    sourceLangQuery.select2({
         placeholder: 'Source Languages',
         theme: 'bootstrap4'
     });
 
-    $('#target-languages').select2({
+    targetLangQuery.select2({
         placeholder: 'Target Languages',
         theme: 'bootstrap4'
     });
 
-    $('#relationships').select2({
+    relationshipQuery.select2({
         placeholder: 'Relationships',
         theme: 'bootstrap4'
     });
 
-    $('select').on('change', function (d) {
-        // var uldiv = $(this).siblings('span.select2').find('ul');
-        // var count = $(this).find('option:selected').length;
-        // if (count > 2)
-        //     uldiv.html("<li style=\"margin-top: .25rem;\">" + count + " languages selected</li>");
+    var selectQuery = $('select');
+
+    selectQuery.on('change', function (d) {
+        var uldiv = $(this).siblings('span.select2').find('ul');
+        var count = $(this).find('option:selected').length;
+        var ww = (d.target.id === "relationships") ? "relationships" : "languages";
+        if (count > 2)
+            uldiv.html("<li style=\"margin-top: .25rem;\">" + count + " "+ ww +" selected</li>");
 
 
         if (d.target.id === "source-languages") slang = $("#" + d.target.id).select2("data")[0].id;
         else if (d.target.id === "target-languages") {
-            var temp = [];
+            var tempTarget = [];
             $("#" + d.target.id).select2("data").forEach(function (l) {
-                if (temp.indexOf(l.id) === -1)
-                    temp.push(l.id);
+                if (tempTarget.indexOf(l.id) === -1)
+                    tempTarget.push(l.id);
             });
-            if(temp.length === 0) tlang=new Set(["eng"]);
-            else tlang = new Set(temp);
+            if (tempTarget.length === 0) {
+                alert("You cannot unselect all languages. \"eng\" will be selected automatically");
+                targetLangQuery.val("eng").trigger("change");
+            }else tlang = new Set(tempTarget);
+        }
+        else {
+            var tempRel = [];
+            $("#" + d.target.id).select2("data").forEach(function (l) {
+                if (tempRel.indexOf(l.id) === -1)
+                    tempRel.push(l.id);
+            });
+            if (tempRel.length === 0){
+                alert("You cannot unselect all relationships. All relationships will be selected automatically");
+                relationshipQuery.val(relationships).trigger("change");
+            }
+            else srels = new Set(tempRel);
         }
     });
 
-    $('select').on('select2:open', function (d) {
-        if ($(".select2-dropdown").find("button").length === 0 && d.target.id !== "source-languages")
-            $(".select2-dropdown").prepend("<div><button id=\"" + d.target.id + "-all\" class=\"btn btn-primary buttons\">Select All</button><button id=\"" + d.target.id +
-                "-off\" class=\"btn btn-primary buttons\">Unselect All</button></div>");
 
-        $("#" + d.target.id + "-all").on("click", function () {
-            $('#' + d.target.id + ' > option').prop("selected", true);
-            $("#" + d.target.id).trigger("change");
-        });
+    sourceLangQuery.trigger("change");
+    targetLangQuery.trigger("change");
+    relationshipQuery.trigger("change");
 
-        $("#" + d.target.id + "-off").on("click", function () {
-            $("#" + d.target.id).val(null).trigger("change");
-        });
-    })
-    ;
-    $('select').on('select2:closing', function () {
-        $(".select2-dropdown").find("div").remove();
-    });
-}
+    // var select2DropDownQuery;
+    //
+    // selectQuery.on('select2:open', function (d) {
+    //     select2DropDownQuery = $(".select2-dropdown");
+    //     if (select2DropDownQuery.find("button").length === 0 && d.target.id !== "source-languages")
+    //         select2DropDownQuery.prepend("<div><button id=\"" + d.target.id + "-all\" class=\"btn btn-primary buttons\">Select All</button><button id=\"" + d.target.id +
+    //             "-off\" class=\"btn btn-primary buttons\">Unselect All</button></div>");
+    //
+    //     $("#" + d.target.id + "-all").on("click", function () {
+    //         $('#' + d.target.id + ' > option').prop("selected", true);
+    //         $("#" + d.target.id).trigger("change");
+    //     });
+    //
+    //     $("#" + d.target.id + "-off").on("click", function () {
+    //         $("#" + d.target.id).val(null).trigger("change");
+    //     });
+    // });
+    //
+    // selectQuery.on('select2:closing', function () {
+    //     select2DropDownQuery.find("div").remove();
+    // });
 }
