@@ -19,7 +19,7 @@ var graph;
 
 
 function search() {
-    var word = d3.select("#search-box").property("value").toLowerCase();
+    var word = d3.select("#search-box").property("value");
     d3.select("#searched-word").text(word);
 
     // load the data
@@ -323,19 +323,24 @@ d3.json("/filters").then(function (_filters) {
     relationships = _filters.rels;
     srels = new Set(relationships);
     initializeFilters();
-    initializeSelect2();
 });
 
 function initializeFilters() {
-    languages.forEach(function (lang) {
-        var str = (tlang.has(lang)) ? "<option selected value="+lang+">" : "<option value="+lang+">";
-        var str2 = (slang === lang) ? "<option selected value="+lang+">" : "<option value="+lang+">";
-        sourceLangQuery.append(str2 + lang + "</option>");
-        targetLangQuery.append(str + lang + "</option>");
+    d3.json("/demo_data/langcodes.json").then(function(t) {
+        if(!t) return;
+        var codes = t[0];
+        languages.forEach(function (lang) {
+            var str = (tlang.has(lang)) ? "<option selected value=" + lang + ">" : "<option value=" + lang + ">";
+            var str2 = (slang === lang) ? "<option selected value=" + lang + ">" : "<option value=" + lang + ">";
+            sourceLangQuery.append(str2 + codes[lang].en[0] + "</option>");
+            targetLangQuery.append(str + codes[lang].en[0] + "</option>");
+        });
     });
     relationships.forEach(function (rel){
         relationshipQuery.append("<option selected value="+rel +" class="+ rel + ">"+rel+"</option>")
-    })
+    });
+
+    initializeSelect2();
 
 }
 
@@ -391,30 +396,7 @@ function initializeSelect2() {
         }
     });
 
-
     sourceLangQuery.trigger("change");
     targetLangQuery.trigger("change");
     relationshipQuery.trigger("change");
-
-    // var select2DropDownQuery;
-    //
-    // selectQuery.on('select2:open', function (d) {
-    //     select2DropDownQuery = $(".select2-dropdown");
-    //     if (select2DropDownQuery.find("button").length === 0 && d.target.id !== "source-languages")
-    //         select2DropDownQuery.prepend("<div><button id=\"" + d.target.id + "-all\" class=\"btn btn-primary buttons\">Select All</button><button id=\"" + d.target.id +
-    //             "-off\" class=\"btn btn-primary buttons\">Unselect All</button></div>");
-    //
-    //     $("#" + d.target.id + "-all").on("click", function () {
-    //         $('#' + d.target.id + ' > option').prop("selected", true);
-    //         $("#" + d.target.id).trigger("change");
-    //     });
-    //
-    //     $("#" + d.target.id + "-off").on("click", function () {
-    //         $("#" + d.target.id).val(null).trigger("change");
-    //     });
-    // });
-    //
-    // selectQuery.on('select2:closing', function () {
-    //     select2DropDownQuery.find("div").remove();
-    // });
 }

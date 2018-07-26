@@ -21,4 +21,6 @@ public interface WordnetRepository extends Neo4jRepository<Wordnet, Long> {
 
     @Query("match (s:Wordnet{name:{word}, lang:{sourceLang}})-[r]-(e) where e.lang in {targetLang} and type(r) in {rels} return s,r,e")
     List<Wordnet> graphOfWordWithSourceAndTargetLang(@Param("word") String word, @Param("sourceLang") String sourceLang, @Param("targetLang") String[] targetLang, @Param("rels")String[] rels);
+
+
 }

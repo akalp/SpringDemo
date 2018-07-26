@@ -26,9 +26,11 @@
 * Grafiğin anlaşılabilir olması için ufak görüntü ayarları yapıldı.
 * İlişkiye göre filtreleme eklendi. 
 * Path'lere tooltip eklendi. 
+* Dil kodları dilleri İngilizce karşılığına çevrildi.
 
 ### Hatalar
 * Sunucu çalıştırıldığında bir hata alınıyor ama bu çalışmaya mani olmuyor.
+* Tarayıcı tarafında iki farklı hata alınıyor. Tanımlı olmayan bir şeyin özelliğine erişemezsin diye fakat erişemese kodun o kısmı çalışmaz, fakat çalışıyor.
 
 ### Notlar
 * PostgreSQL, JDBC yerine JPA kullanılarak bağlandı. JDBC ile sonuç çekilemedi.
@@ -37,5 +39,4 @@
 * İlişki filtrelerinin tamamı kaldırılınca tüm ilişkiler tekrar seçiliyor. (Uyarı gösteriliyor.)
 
 ### Yapılacaklar
-* Dil kodları dil isimlerine çevirilmeli.
 * Node ekleme işlemi eklenmeli.
