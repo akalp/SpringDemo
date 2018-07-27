@@ -133,7 +133,7 @@ function search() {
         if (link) { //for clear old data
             d3.select(".nodes").remove();
             d3.select(".links").remove();
-            d3.select("#definitions").selectAll(".card").each(function () {
+            d3.select("#definitions").selectAll(".card-header").each(function () {
                 $(this).show();
             });
             wordtypes.forEach(function (d) {
@@ -241,7 +241,7 @@ function search() {
         var wordtypes = ["Noun", "Verb", "Adjective", "Adverb"];
         wordtypes.forEach(function (type) {
             if(graph.definitions[type].length === 0)
-                $("#"+type+"s").hide();
+                $("#"+type+"-definitions").hide();
             else
                 graph.definitions[type].forEach(function (def) {
                     definitions.select("#"+type+"s")
