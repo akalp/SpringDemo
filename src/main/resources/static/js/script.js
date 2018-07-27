@@ -299,7 +299,7 @@ function search() {
         $(".node").click(function () {
             $('.tooltip').remove();
             d3.select("#search-box").property("value", $(this).text());
-            sourceLangQuery.val($(this).attr("lang"));
+            sourceLangQuery.val($(this).attr("lang")).trigger("change");
             $("#search").click();
         });
     }
