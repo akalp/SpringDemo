@@ -237,20 +237,36 @@ function search() {
 
     //definitions
     function initializeDefinitions() {
-        graph.nodes.forEach(function (d) {
-            definitions.select('#' + d.type + 's')
-                .append('div')
-                .attr("class", "card-body")
-                .attr("w_id", function () {
-                    if (d.synsetID) return d.synsetID
-                })
-                .html("<b>" + d.word + ":&#9;</b>" + d.definition);
-        });
 
-        d3.select("#definitions").selectAll(".card").each(function () {
-            if ($(this).find(".collapse").find(".card-body").length === 0)
-                $(this).hide();
+        var wordtypes = ["Noun", "Verb", "Adjective", "Adverb"];
+        wordtypes.forEach(function (type) {
+            if(graph.definitions[type].length === 0)
+                $("#"+type+"s").hide();
+            else
+                graph.definitions[type].forEach(function (def) {
+                    definitions.select("#"+type+"s")
+                        .append("div")
+                        .attr("class", "card-body")
+                        .attr("w_id", def.id)
+                        .html("<b>" + $(".node[w_id=" + def.id + "]").text() + ":&#9;</b>" + def.definition)
+                })
         })
+
+
+        // graph.nodes.forEach(function (d) {
+        //     definitions.select('#' + d.type + 's')
+        //         .append('div')
+        //         .attr("class", "card-body")
+        //         .attr("w_id", function () {
+        //             if (d.synsetID) return d.synsetID
+        //         })
+        //         .html("<b>" + d.word + ":&#9;</b>" + d.definition);
+        // });
+        //
+        // d3.select("#definitions").selectAll(".card").each(function () {
+        //     if ($(this).find(".collapse").find(".card-body").length === 0)
+        //         $(this).hide();
+        // })
     }
 
 

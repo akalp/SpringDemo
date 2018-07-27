@@ -35,13 +35,18 @@ public class Controller {
     private Map<String, Object> toD3(Collection<Wordnet> wordnets) {
         List<Map<String, Object>> nodes = new ArrayList<>();
         List<Map<String, Object>> rels = new ArrayList<>();
+        Map<String, Set<String>> synsetIDs = new HashMap<>();
+        synsetIDs.put("Noun", new HashSet<>());
+        synsetIDs.put("Verb", new HashSet<>());
+        synsetIDs.put("Adverb", new HashSet<>());
+        synsetIDs.put("Adjective", new HashSet<>());
+        Map<String, Object> definitions = new HashMap<>();
         
         String[] nodeKeys = new String[]{"word","lang","type", "synsetID", "definition"};
         
         for (Wordnet wordnet : wordnets) {
             if (wordnet.getSynsetID() != null)
-                wordnet.setDefinition(definitionRepository.findDefinitionBySynsetID(wordnet.getSynsetID()).getEng());
-            
+                synsetIDs.get(wordnet.getType()).add(wordnet.getSynsetID());
             Map<String, Object> source = map(nodeKeys, 
                     new Object[]{wordnet.getName(), wordnet.getLang(), wordnet.getType(), wordnet.getSynsetID(), wordnet.getDefinition()});
             
@@ -51,8 +56,8 @@ public class Controller {
             if (wordnet.getSynsets() != null)
                 for (SynsetRel synsetRel : wordnet.getSynsets()) {
                     Wordnet node = synsetRel.getE();
-                    node.setDefinition(definitionRepository.findDefinitionBySynsetID(node.getSynsetID()).getEng());
-                    Map<String, Object> target = map(nodeKeys, 
+                    synsetIDs.get(node.getType()).add(node.getSynsetID());
+                    Map<String, Object> target = map(nodeKeys,
                             getNodeObjects(node));
                     if(!nodes.contains(target)){
                         nodes.add(target);
@@ -62,8 +67,8 @@ public class Controller {
             if (wordnet.getHyponyms() != null)
                 for (HyponymRel hyponymRel : wordnet.getHyponyms()) {
                     Wordnet node = hyponymRel.getE();
-                    node.setDefinition(definitionRepository.findDefinitionBySynsetID(node.getSynsetID()).getEng());
-                    Map<String, Object> target = map(nodeKeys, 
+                    synsetIDs.get(node.getType()).add(node.getSynsetID());
+                    Map<String, Object> target = map(nodeKeys,
                             getNodeObjects(node));
                     if(!nodes.contains(target)){
                         nodes.add(target);
@@ -73,8 +78,8 @@ public class Controller {
             if (wordnet.getHypernyms() != null)
                 for (HypernymRel hypernymRel : wordnet.getHypernyms()) {
                     Wordnet node = hypernymRel.getE();
-                    node.setDefinition(definitionRepository.findDefinitionBySynsetID(node.getSynsetID()).getEng());
-                    Map<String, Object> target = map(nodeKeys, 
+                    synsetIDs.get(node.getType()).add(node.getSynsetID());
+                    Map<String, Object> target = map(nodeKeys,
                             getNodeObjects(node));
                     if(!nodes.contains(target)){
                         nodes.add(target);
@@ -85,8 +90,8 @@ public class Controller {
             if (wordnet.getAntonyms() != null)
                 for (AntonymRel antonymRel : wordnet.getAntonyms()) {
                     Wordnet node = antonymRel.getE();
-                    node.setDefinition(definitionRepository.findDefinitionBySynsetID(node.getSynsetID()).getEng());
-                    Map<String, Object> target = map(nodeKeys, 
+                    synsetIDs.get(node.getType()).add(node.getSynsetID());
+                    Map<String, Object> target = map(nodeKeys,
                             getNodeObjects(node));
                     if(!nodes.contains(target)){
                         nodes.add(target);
@@ -97,8 +102,8 @@ public class Controller {
             if (wordnet.getMeronyms() != null)
                 for (MeronymRel meronymRel : wordnet.getMeronyms()) {
                     Wordnet node = meronymRel.getE();
-                    node.setDefinition(definitionRepository.findDefinitionBySynsetID(node.getSynsetID()).getEng());
-                    Map<String, Object> target = map(nodeKeys, 
+                    synsetIDs.get(node.getType()).add(node.getSynsetID());
+                    Map<String, Object> target = map(nodeKeys,
                             getNodeObjects(node));
                     if(!nodes.contains(target)){
                         nodes.add(target);
@@ -108,8 +113,8 @@ public class Controller {
             if (wordnet.getHolonyms() != null)
                 for (HolonymRel holonymRel : wordnet.getHolonyms()) {
                     Wordnet node = holonymRel.getE();
-                    node.setDefinition(definitionRepository.findDefinitionBySynsetID(node.getSynsetID()).getEng());
-                    Map<String, Object> target = map(nodeKeys, 
+                    synsetIDs.get(node.getType()).add(node.getSynsetID());
+                    Map<String, Object> target = map(nodeKeys,
                             getNodeObjects(node));
                     if(!nodes.contains(target)){
                         nodes.add(target);
@@ -117,7 +122,16 @@ public class Controller {
                     rels.add(map(new String[]{"source", "target", "type"}, new Object[]{nodes.indexOf(source), nodes.indexOf(target), "Holonym"}));
                 }    
         }
-        return map(new String[]{"nodes", "links"} , new Object[]{nodes,rels});
+
+        for(String key: synsetIDs.keySet()){
+            List<Definition> defs = definitionRepository.findDefinitionsBySynsetIDIsIn(synsetIDs.get(key).toArray());
+            List<Map<String, Object>> maps = new ArrayList<>();
+            for(Definition definition: defs){
+                maps.add(map(new String[]{"id", "definition"}, new Object[]{definition.getSynsetID(), definition.getEng()}));
+            }
+            definitions.put(key, maps);
+        }
+        return map(new String[]{"nodes", "links", "definitions"} , new Object[]{nodes,rels,definitions});
     }
 
     private Map<String, Object> map(String[] keys, Object[] objects) {
