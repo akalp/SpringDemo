@@ -240,33 +240,17 @@ function search() {
 
         var wordtypes = ["Noun", "Verb", "Adjective", "Adverb"];
         wordtypes.forEach(function (type) {
-            if(graph.definitions[type].length === 0)
-                $("#"+type+"-definitions").hide();
+            if (graph.definitions[type].length === 0)
+                $("#" + type + "-definitions").hide();
             else
                 graph.definitions[type].forEach(function (def) {
-                    definitions.select("#"+type+"s")
+                    definitions.select("#" + type + "s")
                         .append("div")
                         .attr("class", "card-body")
                         .attr("w_id", def.id)
                         .html("<b>" + $(".node[w_id=" + def.id + "]").text() + ":&#9;</b>" + def.definition)
                 })
         })
-
-
-        // graph.nodes.forEach(function (d) {
-        //     definitions.select('#' + d.type + 's')
-        //         .append('div')
-        //         .attr("class", "card-body")
-        //         .attr("w_id", function () {
-        //             if (d.synsetID) return d.synsetID
-        //         })
-        //         .html("<b>" + d.word + ":&#9;</b>" + d.definition);
-        // });
-        //
-        // d3.select("#definitions").selectAll(".card").each(function () {
-        //     if ($(this).find(".collapse").find(".card-body").length === 0)
-        //         $(this).hide();
-        // })
     }
 
 
@@ -321,44 +305,47 @@ function search() {
     }
 }
 
+//////FILTER PART//////
+
 d3.select("#filter-submit").on("click", function () {
     search();
 });
-
 
 var sourceLangQuery = $("#source-languages");
 var targetLangQuery = $("#target-languages");
 var relationshipQuery = $("#relationships");
 
+//Setting default values of variables
 var slang = "eng", tlang = new Set(["eng"]), srels;
 
+//Getting languages and relationships types from server
 var languages;
 var relationships;
 d3.json("/filters").then(function (_filters) {
     languages = _filters.langs;
     relationships = _filters.rels;
     srels = new Set(relationships);
-    initializeFilters();
-});
 
-function initializeFilters() {
-    d3.json("/demo_data/langcodes.json").then(function(t) {
-        if(!t) return;
-        var codes = t[0];
+    //Getting 3-letter-code to language name file
+    d3.json("/demo_data/langcodes2.json").then(function (s) {
+
+        //Filling select tags of languages
         languages.forEach(function (lang) {
             var str = (tlang.has(lang)) ? "<option selected value=" + lang + ">" : "<option value=" + lang + ">";
             var str2 = (slang === lang) ? "<option selected value=" + lang + ">" : "<option value=" + lang + ">";
-            sourceLangQuery.append(str2 + codes[lang].en[0] + "</option>");
-            targetLangQuery.append(str + codes[lang].en[0] + "</option>");
+            sourceLangQuery.append(str2 + s.names[lang].name + "</option>");
+            targetLangQuery.append(str + s.names[lang].name + "</option>");
         });
     });
-    relationships.forEach(function (rel){
-        relationshipQuery.append("<option selected value="+rel +" class="+ rel + ">"+rel+"</option>")
+
+    //Filling select tags of relationships
+    relationships.forEach(function (rel) {
+        relationshipQuery.append("<option selected value=" + rel + " class=" + rel + ">" + rel + "</option>")
     });
 
     initializeSelect2();
 
-}
+});
 
 function initializeSelect2() {
     sourceLangQuery.select2({
@@ -379,12 +366,12 @@ function initializeSelect2() {
     var selectQuery = $('select');
 
     selectQuery.on('change', function (d) {
-        var uldiv = $(this).siblings('span.select2').find('ul');
-        var count = $(this).find('option:selected').length;
-        var ww = (d.target.id === "relationships") ? "relationships" : "languages";
-        if (count > 2)
-            uldiv.html("<li style=\"margin-top: .25rem;\">" + count + " "+ ww +" selected</li>");
-
+        // var uldiv = $(this).siblings('span.select2').find('ul');
+        // var count = $(this).find('option:selected').length;
+        // var ww = (d.target.id === "relationships") ? "relationships" : "languages";
+        // if (count > 2)
+        //     uldiv.html("<li style=\"margin-top: .25rem;\">" + count + " " + ww + " selected</li>");
+        //
 
         if (d.target.id === "source-languages") slang = $("#" + d.target.id).select2("data")[0].id;
         else if (d.target.id === "target-languages") {
@@ -396,7 +383,7 @@ function initializeSelect2() {
             if (tempTarget.length === 0) {
                 alert("You cannot unselect all languages. \"eng\" will be selected automatically");
                 targetLangQuery.val("eng").trigger("change");
-            }else tlang = new Set(tempTarget);
+            } else tlang = new Set(tempTarget);
         }
         else {
             var tempRel = [];
@@ -404,7 +391,7 @@ function initializeSelect2() {
                 if (tempRel.indexOf(l.id) === -1)
                     tempRel.push(l.id);
             });
-            if (tempRel.length === 0){
+            if (tempRel.length === 0) {
                 alert("You cannot unselect all relationships. All relationships will be selected automatically");
                 relationshipQuery.val(relationships).trigger("change");
             }
@@ -412,6 +399,7 @@ function initializeSelect2() {
         }
     });
 
+    //Trigger change function to view changes in filter part
     sourceLangQuery.trigger("change");
     targetLangQuery.trigger("change");
     relationshipQuery.trigger("change");
